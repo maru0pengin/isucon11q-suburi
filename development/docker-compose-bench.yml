@@ -1,6 +1,5 @@
 version: "3.8"
 services:
-
   backend:
     build:
       context: ..
@@ -12,10 +11,12 @@ services:
       MYSQL_USER: isucon
       MYSQL_PASS: isucon
       POST_ISUCONDITION_TARGET_BASE_URL: "http://isucondition-1.t.isucon.dev:3000"
+      NEW_RELIC_APP_NAME: "isucon-11q"
+      NEW_RELIC_LICENSE_KEY: "db9747bcb9f39d183c042f798433013cFFFFNRAL"
     entrypoint: dockerize -wait tcp://mysql-backend:3306 -timeout 60s
     command: air -c /development/air.toml
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - "../webapp/go:/webapp/go"
       - "../webapp/ec256-public.pem:/webapp/ec256-public.pem"
@@ -54,7 +55,7 @@ services:
     environment:
       ISUXBENCH_TARGET: backend:3000
       ISUXBENCH_ALL_ADDRESSES: backend
-    working_dir:  /bench_dir
+    working_dir: /bench_dir
     entrypoint: bash
     tty: true
     volumes:
