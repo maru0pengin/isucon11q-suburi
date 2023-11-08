@@ -199,6 +199,7 @@ services:
       - "../webapp/sql/0_Schema.sql:/docker-entrypoint-initdb.d/0_Schema.sql"
       - "../development/mysql-backend/1_Constraint.sql:/docker-entrypoint-initdb.d/1_Constraint.sql"
       - "../development/mysql-backend/2_Init.sql:/docker-entrypoint-initdb.d/2_Init.sql"
+      - "../development/mysql-backend/mysql-data/:/var/lib/mysql"
     expose:
       - "3306"
     ports:
